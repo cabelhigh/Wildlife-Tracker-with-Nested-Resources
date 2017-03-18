@@ -14,6 +14,16 @@
   <strong>Kingdom:</strong>
   <%= @animal.kingdom %>
 </p>
+<table>
+  <% @animal.sightings.each do |animal| %>
+  <tr>
+    <td><%="#{animal.latitude}"%></td>
+    <td><%="#{animal.longitude}"%></td>
+    <td><%="#{animal.date}"%></td>
+    <td><%="#{animal.time}"%></td>
+  </tr>
+    <%end%>
+  </table>
 
 <div id="map">
 
@@ -21,3 +31,4 @@
 
 <%= link_to 'Edit', edit_animal_path(@animal) %> |
 <%= link_to 'Back', animals_path %>
+<%= link_to 'Update',new_sighting_path %>

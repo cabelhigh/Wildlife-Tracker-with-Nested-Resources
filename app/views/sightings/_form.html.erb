@@ -30,6 +30,10 @@
   <div class="field">
     <%= f.label :animal_id %><br>
     <%= select(:sighting,:animal_id, @animals) %>
+    <div class="field">
+      <%= f.label :region %><br>
+      <%=  f.select:region,['safari', 'Madrid', 'Africa'],:prompt => 'Select One'%>
+      
 
   </div>
   <div class="actions">
