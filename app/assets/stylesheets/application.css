@@ -17,3 +17,8 @@
 td {
   text-align: center;
 }
+
+#map {
+  height: 500px;
+  width: 500px;
+}
