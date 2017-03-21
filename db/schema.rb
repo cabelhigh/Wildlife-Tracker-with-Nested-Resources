@@ -25,10 +25,10 @@ ActiveRecord::Schema.define(version: 20170315185615) do
   end
 
   create_table "sightings", force: :cascade do |t|
-    t.string   "date"
-    t.string   "time"
-    t.string   "latitude"
-    t.string   "longitude"
+    t.date     "date"
+    t.time     "time"
+    t.float    "latitude"
+    t.float    "longitude"
     t.integer  "animal_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

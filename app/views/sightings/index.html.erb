@@ -35,3 +35,15 @@
 <br>
 
 <%= link_to 'New Sighting', new_sighting_path %>
+
+<div id="sightings_map">
+  One day, a map may populate this hallowed ground...
+</div>
+
+<div id="overlay"></div>
+
+<div id="new_sighting">
+  <%= render partial: 'small_form', locals: {sighting: Sighting.new, animals:  Animal.all.map do |animal|
+    [animal.name, animal.id]
+  end} %>
+</div>

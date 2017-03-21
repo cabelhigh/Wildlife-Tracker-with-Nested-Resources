@@ -14,11 +14,53 @@
  *= require_self
  */
 
-td {
+table {
+  border-collapse: collapse;
+  border: 1px black #4CAF50;
+}
+
+td, th {
+  padding: 3px;
   text-align: center;
 }
 
-#map {
+thead {
+  background-color: #4CAF50;
+   color: #fff;
+   text-align: left;
+}
+
+#sightings_map {
   height: 500px;
   width: 500px;
+}
+
+.marker-window {
+  border: 1px black solid;
+}
+
+#overlay{
+  position:fixed;
+  width:100%;
+  height:100%;
+  top:0;
+  left:0;
+  opacity:0.6;
+  background-color: black;
+  z-index: 1;
+}
+
+#new_sighting {
+
+  text-align: center;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 200px;
+  height: 250px;
+  z-index: 9999;
+  background-color: white;
+  border: 2px black solid;
+
 }

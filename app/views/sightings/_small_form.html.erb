@@ -1,10 +1,10 @@
-<%= form_for(@sighting) do |f| %>
-  <% if @sighting.errors.any? %>
+<%= form_for(sighting) do |f| %>
+  <% if sighting.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@sighting.errors.count, "error") %> prohibited this sighting from being saved:</h2>
+      <h2><%= pluralize(sighting.errors.count, "error") %> prohibited this sighting from being saved:</h2>
 
       <ul>
-      <% @sighting.errors.full_messages.each do |message| %>
+      <% sighting.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -20,16 +20,8 @@
     <%= f.time_field :time %>
   </div>
   <div class="field">
-    <%= f.label :latitude %><br>
-    <%= f.number_field :latitude, step: :any %>
-  </div>
-  <div class="field">
-    <%= f.label :longitude %><br>
-    <%= f.number_field :longitude, step: :any %>
-  </div>
-  <div class="field">
     <%= f.label :animal_id %><br>
-    <%= select(:sighting,:animal_id, @animals) %>
+    <%= select(:sighting,:animal_id, animals) %>
   </div>
     <div class="field">
     <%= f.label :region %><br>
@@ -38,4 +30,7 @@
   <div class="actions">
     <%= f.submit %>
   </div>
-<% end %>
+  <div class="close">
+      <button>Close</button>
+  </div>
+  <% end %>

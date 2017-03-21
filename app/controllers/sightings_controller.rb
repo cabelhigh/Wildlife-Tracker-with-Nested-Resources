@@ -5,6 +5,7 @@ class SightingsController < ApplicationController
   # GET /sightings.json
   def index
     @sightings = Sighting.all
+    @animals = Animal.all
   end
 
   # GET /sightings/1
@@ -64,6 +65,18 @@ class SightingsController < ApplicationController
     end
   end
 
+  def get_sightings
+    @all_sightings = Sighting.all
+    @hash = Gmaps4rails.build_markers(@all_sightings) do |sighting, marker|
+      marker.lat(sighting.latitude)
+      marker.lng(sighting.longitude)
+      marker.infowindow(makeInfoWindow(sighting))
+    end
+
+    render json: @hash.to_json
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_sighting
@@ -73,5 +86,12 @@ class SightingsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def sighting_params
       params.require(:sighting).permit(:date, :time, :latitude, :longitude, :animal_id)
+    end
+
+    def makeInfoWindow(sighting)
+      "<div class='marker-window'>
+        <p>On #{sighting.date.strftime('%a %b %d %Y')} at #{sighting.time.strftime('%I:%M%p')}</p>
+        <p>#{Animal.find(sighting.animal_id).name} was spotted.</p>
+      </div>"
     end
 end
