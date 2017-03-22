@@ -1,36 +1,16 @@
-<%= form_for(sighting) do |f| %>
-  <% if sighting.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(sighting.errors.count, "error") %> prohibited this sighting from being saved:</h2>
+  <div class="field">
+    <label for="sighting_date">Date</label><br>
+    <input type="date" name="sighting[date]" id="sighting_date" />
+  </div>
+  <div class="field">
+    <label for="sighting_time">Time</label><br>
+    <input type="time" name="sighting[time]" id="sighting_time" />
+  </div>
+  <div class="field">
+    <label for="sighting_animal_id">Animal</label><br>
+    <select name="sighting[animal_id]" id="sighting_animal_id"><option value="1">Lion</option></select>
+  </div>
 
-      <ul>
-      <% sighting.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :date %><br>
-    <%= f.date_field :date %>
-  </div>
-  <div class="field">
-    <%= f.label :time %><br>
-    <%= f.time_field :time %>
-  </div>
-  <div class="field">
-    <%= f.label :animal_id %><br>
-    <%= select(:sighting,:animal_id, animals) %>
-  </div>
-    <div class="field">
-    <%= f.label :region %><br>
-    <%=  f.select:region,['safari', 'Madrid', 'Africa'],:prompt => 'Select One'%>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-  <div class="close">
-      <button>Close</button>
-  </div>
-  <% end %>
+  <button>Create Sighting</button>
+  <br>
+  <button>Close</button>

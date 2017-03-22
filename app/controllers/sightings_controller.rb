@@ -29,7 +29,7 @@ class SightingsController < ApplicationController
   # POST /sightings.json
   def create
     @sighting = Sighting.new(sighting_params)
-
+    puts "LATITUDE #{@sighting.latitude}"
     respond_to do |format|
       if @sighting.save
         format.html { redirect_to @sighting, notice: 'Sighting was successfully created.' }

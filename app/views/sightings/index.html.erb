@@ -18,12 +18,11 @@
   <tbody>
     <% @sightings.each do |sighting| %>
       <tr>
-        <td><%= sighting.date %></td>
-        <td><%= sighting.time %></td>
+        <td style="text-align: left"><%= sighting.date.strftime("%B %dth, %Y") %></td>
+        <td><%= sighting.time.strftime("%I:%M%p") %></td>
         <td><%= sighting.latitude %></td>
         <td><%= sighting.longitude %></td>
-        <td><%= sighting.animal.id %></td>
-        <td><%= sighting.region %></td>
+        <td><%= Animal.find(sighting.animal.id).name %></td>
         <td><%= link_to 'Show', sighting %></td>
         <td><%= link_to 'Edit', edit_sighting_path(sighting) %></td>
         <td><%= link_to 'Destroy', sighting, method: :delete, data: { confirm: 'Are you sure?' } %></td>

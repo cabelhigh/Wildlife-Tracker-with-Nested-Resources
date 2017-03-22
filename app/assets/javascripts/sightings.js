@@ -11,7 +11,6 @@ function createSightingsMap(dataFromServer) {
     handler.getMap().setZoom(12);
     handler.getMap().setCenter(new google.maps.LatLng(33.2527597,-116.4872973))
   });
-  console.log(handler.getMap())
   google.maps.event.addListener(handler.getMap(), 'click', function(event){
     placeMarker(event.latLng, handler.getMap());
   });
@@ -20,22 +19,48 @@ function createSightingsMap(dataFromServer) {
 function placeMarker(location, map){
   $("#overlay").show()
   $("#new_sighting").show()
-  $.ajax({
-    dataType: 'json',
-    url: '/sightings/1',
-    type: 'GET',
-    success:function(){
-      console.log(location);
-      var marker = new google.maps.Marker({
-        position: location,
-        map: map
-      })
-       map.panTo(location);
-    },
-    error: function(jqXHR, textStatus, errorThrown) {
-      alert("Getting map data failed: " + errorThrown);
+
+  $("button:contains('Close')").on("click", function() {
+    $("#overlay").hide();
+    $("#new_sighting").hide();
+  })
+
+  $("button:contains('Create Sighting')").on("click", function() {
+    new_sighting = {
+      "sighting" : {
+        "date" : $("#sighting_date").val(),
+        "time" : $("#sighting_time").val(),
+        "animal_id" : $("#sighting_animal_id").val(),
+        "latitude" : location.lat(),
+        "longitude" : location.lng()
+      }
     }
-  });
+
+    console.log(new_sighting);
+    $.ajax({
+      dataType: 'json',
+      url: '/sightings/',
+      type: 'POST',
+      data: new_sighting,
+      success:function(){
+        var marker = new google.maps.Marker({
+          position: location,
+          map: map
+        })
+        map.panTo(location);
+        $("#overlay").hide();
+        $("#new_sighting").hide();
+
+      },
+      error: function(jqXHR, textStatus, errorThrown) {
+        alert("Getting map data failed: " + errorThrown);
+        window.load("/")
+      }
+    });
+
+
+  })
+
 }
 
 function loadAndCreateGmap(){
@@ -58,8 +83,4 @@ $(document).on('ready', loadAndCreateGmap)
 $(document).ready(function() {
   $("#overlay").hide();
   $("#new_sighting").hide();
-  $("button").on("click", function() {
-    $("#overlay").hide();
-    $("#new_sighting").hide();
-  })
 })
